@@ -1,13 +1,14 @@
-import { BrowserRouter, Routes } from "react-router";
+import { RouterProvider } from "react-router";
+import GlobalStyle from "./GlobalStyle.ts";
+import {AppRouter} from "./router/AppRouter.tsx";
 
 function App() {
-  return (
-      <BrowserRouter>
-        <Routes>
-
-        </Routes>
-      </BrowserRouter>
-  );
+    return (
+        <>
+            <GlobalStyle />
+            <RouterProvider router={AppRouter()} />
+        </>
+    );
 }
 
 export default App;
