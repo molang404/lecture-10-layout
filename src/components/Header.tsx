@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router";
 import { useContext } from "react";
 import { ThemeContext } from "../contexts/theme/ThemeContexts.tsx";
+import { TbMoon, TbSun } from "react-icons/tb";
 
 const Head = styled.header`
     height: 64px;
@@ -52,7 +53,9 @@ function Header() {
             </NavLeft>
             <NavRight>
                 <Link to={"/auth/login"}>로그인</Link>
-                <button onClick={context.toggleTheme}>테마토글</button>
+                <button onClick={context.toggleTheme}>
+                    {context.theme === "light" ? <TbSun size={24} /> : <TbMoon size={24} />}
+                </button>
             </NavRight>
         </Head>
     );
