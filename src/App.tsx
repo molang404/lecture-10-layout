@@ -4,6 +4,7 @@ import { AppRouter } from "./router/AppRouter.tsx";
 import { ThemeProvider } from "styled-components";
 import { DarkTheme, LightTheme } from "./styles/theme.ts";
 import { useEffect, useState } from "react";
+import { ThemeContext } from "./contexts/theme/ThemeContexts.tsx";
 
 function App() {
     // 초기값 자리에 함수를 집어넣을 수도 있음
@@ -24,13 +25,15 @@ function App() {
         setTheme((prev) => prev === "dark" ? "light" : "dark");
     };
 
+    // 2. Context 제공자로 묶어주기
     return (
-        <ThemeProvider theme={theme === "light" ? LightTheme : DarkTheme}>
-            {" "}
-            {/* <- ThemeProvider로 감싸진 자식 컴포넌트들 안에서 사용되는 styled-components들에게 해당 theme 제공 */}
-            <GlobalStyle />
-            <RouterProvider router={AppRouter(onClick)} />
-        </ThemeProvider>
+        <ThemeContext.Provider value={{ theme, toggleTheme: onClick }}>
+            <ThemeProvider theme={theme === "light" ? LightTheme : DarkTheme}>
+                {/* <- ThemeProvider로 감싸진 자식 컴포넌트들 안에서 사용되는 styled-components들에게 해당 theme 제공 */}
+                <GlobalStyle />
+                <RouterProvider router={AppRouter()} />
+            </ThemeProvider>
+        </ThemeContext.Provider>
     );
 }
 

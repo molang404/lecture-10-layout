@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router";
+import { useContext } from "react";
+import { ThemeContext } from "../contexts/theme/ThemeContexts.tsx";
 
 const Head = styled.header`
     height: 64px;
@@ -31,7 +33,14 @@ const NavRight = styled.div`
     align-items: center;
 `;
 
-function Header({ onClick }: { onClick: VoidFunction }) {
+function Header() {
+    const context = useContext(ThemeContext);
+    // throw new Error() 는, 에러를 반환시켜버리는 명령, 이 아래로 진행 불가.
+    if (!context) throw new Error("Provider 안에서 사용해주세요!");
+    // Typescript 엔진 그리고 Webstorm은 "이 파일만 보고 판단"
+    // context 라고 하는 변수는, Provider에 감싸져 있어야만 되는 아이
+    // Typescript엔진은 감싸져 있는
+
     return (
         <Head>
             <NavLeft>
@@ -43,7 +52,7 @@ function Header({ onClick }: { onClick: VoidFunction }) {
             </NavLeft>
             <NavRight>
                 <Link to={"/auth/login"}>로그인</Link>
-                <button onClick={onClick}>테마토글</button>
+                <button onClick={context.toggleTheme}>테마토글</button>
             </NavRight>
         </Head>
     );

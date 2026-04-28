@@ -7,14 +7,14 @@ import LogIn from "../pages/LogIn.tsx";
 // AppRouter 컴포넌트 X, 함수 O
 // 매개변수 자리에 onClick이 들어오는데, 얘는 매개변수니까
 // 타입스크립트에 의거하여 타입을 명시해줘야 함
-export const AppRouter = (onClick: VoidFunction) => {
+export const AppRouter = () => {
     // 사용자 권한.       => 일반 사용자, 관리자
     //      회원 관리 => /admin/users/list
     // 이 관리 기능은 Javascript로 접근을 해야함. 그래서 이 방식을 제공하고 있음.
     // (이 방식이 react-router가 권장하는 방식)
     const routes: RouteObject[] = [
         {
-            element: <MainLayout onClick={onClick} />,
+            element: <MainLayout />,
             path: "/",
             children: [
                 { index: true, element: <Home /> },
